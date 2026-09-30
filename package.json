@@ -1,0 +1,14 @@
+{
+  "name": "localserver",
+  "private": true,
+  "type": "module",
+  "workspaces": ["gateway", "ui"],
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning gateway/src/index.ts",
+    "dev:ui": "npm run dev -w ui",
+    "build": "npm run build -w ui",
+    "pm2:start": "npm run build && pm2 start ecosystem.config.cjs && pm2 save",
+    "pm2:restart": "npm run build && pm2 startOrRestart ecosystem.config.cjs --update-env",
+    "typecheck": "tsc -p gateway --noEmit && tsc -p ui --noEmit"
+  }
+}
